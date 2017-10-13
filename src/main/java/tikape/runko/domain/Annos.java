@@ -1,0 +1,1 @@
+package tikape.runko.domain;
