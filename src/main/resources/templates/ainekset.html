@@ -11,15 +11,15 @@
 
         <ul>
             <li th:each="aines : ${ainekset}">
-                <span th:text="${aines.nimi}">Aineksen nimi</span><span th:href="@{/ainekset/{id}/poista(id=${aines.id})}">(poista)</span>
+                <span th:text="${aines.nimi}">Aineksen nimi</span>
             </li>
         </ul>
 
         <h4>Lisää uusi raaka-aine</h4>
-        <form action="#" th:action="@{/smoothiet}" method="POST">
-            <p>Raaka-aineen nimi:<br>
-                    <input type="text" name="smoothien_nimi"/>
-                    <br>
+        <form action="/raaka-aine" method="POST">
+            <p>Raaka-aineen nimi:<br />
+                    <input type="text" name="aine"/>
+                    <br />
                     <input type="submit" value="Lisää" /></p>
         </form>
 
