@@ -9,6 +9,10 @@ public class RaakaAine {
         this.id = id;
         this.nimi = nimi;
     }
+    
+    public RaakaAine(String nimi) {
+        this.nimi = nimi;
+    }
 
     public Integer getId() {
         return id;
