@@ -1,0 +1,62 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+    <head>
+        <title>Smoothiet</title>
+        <meta charset="UTF-8"/>
+    </head>
+
+    <body>
+        <h1>Smoothiet</h1>
+
+        <ul>
+            <li th:each="smoothie : ${smoothiet}">
+                <span th:text="@{/smoothie/{id}(id=${smoothie.id})}" th:text="${smoothie.nimi}">Smoothien nimi</span>
+            </li>
+        </ul>
+
+        <h4>Lisää uusi</h4>
+        <form action="#" th:action="@{/smoothiet}" method="POST">
+            <p>Smoothien nimi: <br><input type="text" name="smoothien_nimi"/>
+                    <br><input type="submit" value="Lisää" /></p>
+        </form>
+        <h4>Lisää raaka-aineita</h4>
+        
+        <form>
+            <p>
+                Smoothien nimi:<br>
+                <select>
+                    <ul>
+                        <li th:each="smoothie : ${smoothiet}">
+                            <option th:text="${smoothie.nimi}">Smoothien nimi</option>
+                        </li>
+                    </ul>
+                </select>
+                <br>
+                    Lisättävä raaka-aine<br>
+                <select>
+                    <ul>
+                        <li th:each="aine : ${aineet}">
+                            <option th:text="${aine.nimi}">aineen nimi</option>
+                        </li>
+                    </ul>
+                </select>
+                <br>
+                Järjestys<br>
+                <input type="text" name="jarkka"></input>
+                <br>Määrä<br>
+                <input type="text" name="maara"></input>
+                <br>Ohje<br>
+                <input type="text" name="ohje"></input>
+            </p>
+        </form>
+        
+        
+        <ul>
+            <li>
+                <a href="../">Smoothielistaukseen</a>
+            </li>
+        </ul>
+
+    </body>
+</html>
