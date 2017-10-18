@@ -56,23 +56,23 @@ public class RaakaAineDao implements Dao<RaakaAine, Integer> {
     }
 
     @Override
-    public RaakaAine save(RaakaAine object) throws SQLException {
+    public RaakaAine save(RaakaAine raakaAine) throws SQLException {
         Connection connection = database.getConnection();
-        PreparedStatement statement = connection.prepareStatement("INSERT INTO RaakaAine (nimi) "
+        PreparedStatement saveStatement = connection.prepareStatement("INSERT INTO RaakaAine (nimi) "
                 + "VALUES (?)");
-        statement.setString(1, object.getNimi());
-        statement.executeUpdate();
-        statement.close();
+        saveStatement.setString(1, raakaAine.getNimi());
+        saveStatement.executeUpdate();
+        saveStatement.close();
 
-        statement = connection.prepareStatement("SELECT * FROM RaakaAine "
-                + "WHERE nimi = ?");
-        statement.setString(1, object.getNimi());
-        ResultSet rs = statement.executeQuery();
+        PreparedStatement retrieveStatement = connection.prepareStatement("SELECT last_insert_rowid() as id");
+        ResultSet rs = retrieveStatement.executeQuery();
+        rs.next();
 
-        RaakaAine raakaAine = new RaakaAine(rs.getInt("id"), rs.getString("nimi"));
+        int latestId = rs.getInt("id");
+        raakaAine.setId(latestId);
 
         rs.close();
-        statement.close();
+        saveStatement.close();
         connection.close();
 
         return raakaAine;
