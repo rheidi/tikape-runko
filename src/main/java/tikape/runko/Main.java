@@ -15,6 +15,16 @@ public class Main {
         Database database = new Database("jdbc:sqlite:db/smoothie.db");
 
         RaakaAineDao rad = new RaakaAineDao (database);
+        AnnosDao and = new AnnosDao(database);
+        
+        get("/", (req, res) -> {
+            List<Annos> annokset = and.findAll();
+            
+            HashMap map = new HashMap<>();
+            map.put("smoothiet", annokset);
+            
+            return new ModelAndView(map, "index");
+        }, new ThymeleafTemplateEngine());
         
         get("/raaka-aine", (req, res) -> {
             List<RaakaAine> aineet = rad.findAll();
