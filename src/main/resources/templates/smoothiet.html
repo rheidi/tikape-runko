@@ -1,9 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
     <head>
-        <title>Smoothiet</title>
-        <meta charset="UTF-8"/>
+        <title>Smoothiet</title>    
+        <meta charset="UTF-8" />
     </head>
 
     <body>
@@ -11,7 +12,8 @@
 
         <ul>
             <li th:each="smoothie : ${smoothiet}">
-                <span th:text="@{/smoothie/{id}(id=${smoothie.id})}" th:text="${smoothie.nimi}">Smoothien nimi</span>
+                <span th:text="@{/smoothie/{id}(id=${smoothie.id})}" th:text="${smoothie.nimi}">Smoothien nimi</span> 
+                <!--Tämä ei vielä toimi, muokkaan tämän vielä paremmin T.Mikael-->
             </li>
         </ul>
 

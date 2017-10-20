@@ -6,11 +6,17 @@ public class Annos {
     private String ohje;
     private Integer maara;
     
-    public Annos(int id, String nimi, String ohje, int maara) {
+    public Annos(int id, String nimi) {
         this.id = id;
         this.nimi = nimi;
-        this.ohje = ohje;
-        this.maara = maara;
+    }
+    
+    public void setId(int id) {
+        this.id = id;
+    }
+    
+    public void setNimi(String nimi) {
+        this.nimi = nimi;
     }
 
     public Integer getId() {
@@ -21,11 +27,4 @@ public class Annos {
         return nimi;
     }
 
-    public String getOhje() {
-        return ohje;
-    }
-
-    public Integer getMaara() {
-        return maara;
-    }
 }
