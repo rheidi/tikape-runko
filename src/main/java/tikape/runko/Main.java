@@ -60,7 +60,7 @@ public class Main {
         Spark.get("/ainekset/:id", (req, res) -> {
             Integer id = Integer.parseInt(req.params(":id"));
             System.out.println(id);
-            //rad.delete(id); <--- Tarvitsee dao toiminnallisuuden
+            rad.delete(id); //<--- Tarvitsee dao toiminnallisuuden
             res.redirect("/ainekset");
             return "meh";
         });
