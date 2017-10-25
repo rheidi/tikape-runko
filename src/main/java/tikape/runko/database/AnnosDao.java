@@ -56,7 +56,7 @@ public class AnnosDao implements Dao<Annos, Integer> {
     }
 
     @Override
-    public Annos save(Annos annos) throws SQLException {
+    public Annos saveOrUpdate(Annos annos) throws SQLException {
         Connection connection = database.getConnection();
         PreparedStatement saveStatement = connection.prepareStatement("INSERT INTO Annos (nimi) "
                 + "VALUES (?)");

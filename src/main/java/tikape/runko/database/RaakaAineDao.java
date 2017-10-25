@@ -56,7 +56,7 @@ public class RaakaAineDao implements Dao<RaakaAine, Integer> {
     }
 
     @Override
-    public RaakaAine save(RaakaAine raakaAine) throws SQLException {
+    public RaakaAine saveOrUpdate(RaakaAine raakaAine) throws SQLException {
         Connection connection = database.getConnection();
         PreparedStatement saveStatement = connection.prepareStatement("INSERT INTO RaakaAine (nimi) "
                 + "VALUES (?)");
@@ -80,15 +80,13 @@ public class RaakaAineDao implements Dao<RaakaAine, Integer> {
 
     @Override
     public void delete(Integer key) throws SQLException {
-        //throw new UnsupportedOperationException("Not supported yet.");
-        
         Connection connection = database.getConnection();
-        
         PreparedStatement statement = connection.prepareStatement("DELETE FROM RaakaAine WHERE RaakaAine.id = (?)");
-        
         statement.setInt(1, key);
-        
         statement.executeUpdate();
+        
+        statement.close();
+        connection.close();
     }
 
 }
