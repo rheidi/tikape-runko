@@ -51,7 +51,7 @@ public class AnnosRaakaAineDao implements Dao<AnnosRaakaAine, Integer> {
     public AnnosRaakaAine save(AnnosRaakaAine ara) throws SQLException {
         Connection connection = database.getConnection();
         PreparedStatement stmt = connection.prepareStatement("INSERT INTO AnnosRaakaAine (id, annos_id, raakaAine_id, maara, ohje) "
-                + "VALUES (null, ?, ?)");
+                + "VALUES (null, ?, ?, ?, ?)");
         stmt.setInt(1, ara.getAnnos_id());
         stmt.setInt(2, ara.getAnnos_id());
         stmt.setInt(3, ara.getMaara());
