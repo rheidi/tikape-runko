@@ -1,4 +1,4 @@
-# tikape-runko
+# Tietokantojen perusteet -ryhmätyö, syksy 2017
 
-Tietokantojen perusteet -kurssilla tehtävän web-sovelluksen pohja.
+Ryhmätyönä tehty web-sovellus, joka mallintaa smoothiearkistoa.
 
