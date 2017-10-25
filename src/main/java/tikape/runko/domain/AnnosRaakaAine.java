@@ -6,10 +6,10 @@ public class AnnosRaakaAine {
     private int raakaAine_id;
     private String nimi;
     private int jarjestys;
-    private int maara;
+    private String maara;
     private String ohje;
 
-    public AnnosRaakaAine(int annos_id, int raakaAine_id, String nimi, int jarjestys, int maara, String ohje) {
+    public AnnosRaakaAine(int annos_id, int raakaAine_id, String nimi, int jarjestys, String maara, String ohje) {
         this.nimi = nimi;
         this.annos_id = annos_id;
         this.raakaAine_id = raakaAine_id;
@@ -42,7 +42,7 @@ public class AnnosRaakaAine {
         return raakaAine_id;
     }
 
-    public int getMaara() {
+    public String getMaara() {
         return maara;
     }
 
@@ -58,7 +58,7 @@ public class AnnosRaakaAine {
         this.raakaAine_id = raakaAine_id;
     }
 
-    public void setMaara(int maara) {
+    public void setMaara(String maara) {
         this.maara = maara;
     }
 

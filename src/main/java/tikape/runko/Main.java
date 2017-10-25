@@ -63,7 +63,7 @@ public class Main {
             int nimi = Integer.parseInt(req.queryParams("smoothie"));
             int raakaAine = Integer.parseInt(req.queryParams("raakaAine"));
             int jarjestys = Integer.parseInt(req.queryParams("jarjestys"));
-            int maara = Integer.parseInt(req.queryParams("maara"));
+            String maara = req.queryParams("maara");
             String ohje = req.queryParams("ohje");
             andrad.saveOrUpdate(new AnnosRaakaAine(nimi, raakaAine, null, jarjestys, maara, ohje));
 
