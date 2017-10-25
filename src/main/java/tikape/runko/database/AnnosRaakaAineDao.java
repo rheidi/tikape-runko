@@ -20,7 +20,7 @@ public class AnnosRaakaAineDao implements Dao<AnnosRaakaAine, Integer> {
                 ResultSet result = conn.prepareStatement("SELECT * FROM AnnosRaakaAine").executeQuery()) {
 
             while (result.next()) {
-                ara.add(new AnnosRaakaAine(result.getInt("id"), result.getInt("annos_id"), result.getInt("raakaAine_id"), result.getInt("maara"), result.getString("ohje")));
+                ara.add(new AnnosRaakaAine(result.getInt("annos_id"), result.getInt("raakaAine_id"), null, result.getInt("jarjestys"), result.getInt("maara"), result.getString("ohje")));
             }
         };
 
@@ -31,13 +31,12 @@ public class AnnosRaakaAineDao implements Dao<AnnosRaakaAine, Integer> {
     public List<AnnosRaakaAine> findOneList(Integer key) throws SQLException {
         List<AnnosRaakaAine> ara = new ArrayList<>();
         Connection conn = database.getConnection();
-        PreparedStatement stmt = conn.prepareStatement("SELECT * FROM AnnosRaakaAine "
-                + "WHERE id = ?");
+        PreparedStatement stmt = conn.prepareStatement("SELECT annos_id, raaka_aine_id, nimi, jarjestys, maara, ohje FROM AnnosRaakaAine LEFT JOIN RaakaAine ON RaakaAine.id = AnnosRaakaAine.raaka_aine_id WHERE annos_id = ?");
         stmt.setInt(1, key);
         ResultSet result = stmt.executeQuery();
 
         while (result.next()) {
-            ara.add(new AnnosRaakaAine(result.getInt("id"), result.getInt("annos_id"), result.getInt("raakaAine_id"), result.getInt("maara"), result.getString("ohje")));
+            ara.add(new AnnosRaakaAine(result.getInt("annos_id"), result.getInt("raaka_aine_id"), result.getString("nimi"), result.getInt("jarjestys"), result.getInt("maara"), result.getString("ohje")));
         }
 
         result.close();
@@ -48,23 +47,21 @@ public class AnnosRaakaAineDao implements Dao<AnnosRaakaAine, Integer> {
     }
 
     @Override
-    public AnnosRaakaAine save(AnnosRaakaAine ara) throws SQLException {
+    public AnnosRaakaAine saveOrUpdate(AnnosRaakaAine ara) throws SQLException {
         Connection connection = database.getConnection();
-        PreparedStatement stmt = connection.prepareStatement("INSERT INTO AnnosRaakaAine (id, annos_id, raakaAine_id, maara, ohje) "
-                + "VALUES (null, ?, ?, ?, ?)");
-        stmt.setInt(1, ara.getAnnos_id());
+        PreparedStatement stmt = connection.prepareStatement("INSERT INTO AnnosRaakaAine (raaka_aine_id, annos_id, jarjestys, maara, ohje) "
+                + "VALUES (?, ?, ?, ?, ?)");
+        stmt.setInt(1, ara.getRaakaAine_id());
         stmt.setInt(2, ara.getAnnos_id());
-        stmt.setInt(3, ara.getMaara());
-        stmt.setString(4, ara.getOhje());
+        stmt.setInt(3, ara.getJarjestys());
+        stmt.setInt(4, ara.getMaara());
+        stmt.setString(5, ara.getOhje());
         stmt.executeUpdate();
         stmt.close();
 
         PreparedStatement retrieveStatement = connection.prepareStatement("SELECT last_insert_rowid() as id");
         ResultSet rs = retrieveStatement.executeQuery();
         rs.next();
-
-        int latestId = rs.getInt("id");
-        ara.setId(latestId);
 
         rs.close();
         stmt.close();
