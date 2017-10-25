@@ -20,14 +20,14 @@ public class AnnosRaakaAineDao implements Dao<AnnosRaakaAine, Integer> {
                 ResultSet result = conn.prepareStatement("SELECT * FROM AnnosRaakaAine").executeQuery()) {
 
             while (result.next()) {
-                ara.add(new AnnosRaakaAine(result.getInt("id"), result.getInt("annos_id"), result.getInt("raakaAine_id")));
+                ara.add(new AnnosRaakaAine(result.getInt("id"), result.getInt("annos_id"), result.getInt("raakaAine_id"), result.getInt("maara"), result.getString("ohje")));
             }
         };
 
         return ara;
     }
 
-    
+    // palauttaa Annokseen liittyvän AnnosRaakaAine listan.
     public List<AnnosRaakaAine> findOneList(Integer key) throws SQLException {
         List<AnnosRaakaAine> ara = new ArrayList<>();
         Connection conn = database.getConnection();
@@ -37,9 +37,9 @@ public class AnnosRaakaAineDao implements Dao<AnnosRaakaAine, Integer> {
         ResultSet result = stmt.executeQuery();
 
         while (result.next()) {
-                ara.add(new AnnosRaakaAine(result.getInt("id"), result.getInt("annos_id"), result.getInt("raakaAine_id")));
-            }
-       
+            ara.add(new AnnosRaakaAine(result.getInt("id"), result.getInt("annos_id"), result.getInt("raakaAine_id"), result.getInt("maara"), result.getString("ohje")));
+        }
+
         result.close();
         stmt.close();
         conn.close();
@@ -50,12 +50,14 @@ public class AnnosRaakaAineDao implements Dao<AnnosRaakaAine, Integer> {
     @Override
     public AnnosRaakaAine save(AnnosRaakaAine ara) throws SQLException {
         Connection connection = database.getConnection();
-        PreparedStatement saveStatement = connection.prepareStatement("INSERT INTO AnnosRaakaAine (id, annos_id, raakaAine_id) "
+        PreparedStatement stmt = connection.prepareStatement("INSERT INTO AnnosRaakaAine (id, annos_id, raakaAine_id, maara, ohje) "
                 + "VALUES (null, ?, ?)");
-        saveStatement.setInt(1, ara.getAnnos_id());
-        saveStatement.setInt(2, ara.getAnnos_id());
-        saveStatement.executeUpdate();
-        saveStatement.close();
+        stmt.setInt(1, ara.getAnnos_id());
+        stmt.setInt(2, ara.getAnnos_id());
+        stmt.setInt(3, ara.getMaara());
+        stmt.setString(4, ara.getOhje());
+        stmt.executeUpdate();
+        stmt.close();
 
         PreparedStatement retrieveStatement = connection.prepareStatement("SELECT last_insert_rowid() as id");
         ResultSet rs = retrieveStatement.executeQuery();
@@ -65,7 +67,7 @@ public class AnnosRaakaAineDao implements Dao<AnnosRaakaAine, Integer> {
         ara.setId(latestId);
 
         rs.close();
-        saveStatement.close();
+        stmt.close();
         connection.close();
 
         return ara;
@@ -80,5 +82,4 @@ public class AnnosRaakaAineDao implements Dao<AnnosRaakaAine, Integer> {
     public AnnosRaakaAine findOne(Integer key) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
 }
