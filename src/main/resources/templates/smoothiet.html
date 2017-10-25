@@ -14,13 +14,12 @@
             <li th:each="smoothie : ${smoothiet}">
                 <a th:href="@{~/smoothiet/{id}(id=${smoothie.id})}">
                     <span th:text="${smoothie.nimi}">Smoothien nimi</span></a>
-                (<a th:href="@{~/smoothiet/{id}/poista(id=${smoothie.id})}">poista</a>)
             </li>
         </ul>
 
         <h4>Lisää uusi</h4>
 
-        <form method="POST" action="">
+        <form method="POST" action="/lisaaSmoothie">
             Smoothien nimi:<br />
             <input type="text" name="smoothie"/><br />
             <input type="submit" value="Lisää"/>

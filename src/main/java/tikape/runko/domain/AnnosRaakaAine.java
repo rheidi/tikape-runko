@@ -2,22 +2,36 @@ package tikape.runko.domain;
 
 public class AnnosRaakaAine {
 
-    private int id;
     private int annos_id;
     private int raakaAine_id;
+    private String nimi;
+    private int jarjestys;
     private int maara;
     private String ohje;
 
-    public AnnosRaakaAine(int id, int annos_id, int raakaAine_id, int maara, String ohje) {
-        this.id = id;
+    public AnnosRaakaAine(int annos_id, int raakaAine_id, String nimi, int jarjestys, int maara, String ohje) {
+        this.nimi = nimi;
         this.annos_id = annos_id;
         this.raakaAine_id = raakaAine_id;
+        this.jarjestys = jarjestys;
         this.maara = maara;
         this.ohje = ohje;
     }
 
-    public int getId() {
-        return id;
+    public String getNimi() {
+        return nimi;
+    }
+
+    public void setNimi(String nimi) {
+        this.nimi = nimi;
+    }
+
+    public int getJarjestys() {
+        return jarjestys;
+    }
+
+    public void setJarjestys(int jarjestys) {
+        this.jarjestys = jarjestys;
     }
 
     public int getAnnos_id() {
@@ -34,10 +48,6 @@ public class AnnosRaakaAine {
 
     public String getOhje() {
         return ohje;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public void setAnnos_id(int annos_id) {
