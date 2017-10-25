@@ -20,7 +20,7 @@ public class AnnosRaakaAineDao implements Dao<AnnosRaakaAine, Integer> {
                 ResultSet result = conn.prepareStatement("SELECT * FROM AnnosRaakaAine").executeQuery()) {
 
             while (result.next()) {
-                ara.add(new AnnosRaakaAine(result.getInt("annos_id"), result.getInt("raakaAine_id"), null, result.getInt("jarjestys"), result.getInt("maara"), result.getString("ohje")));
+                ara.add(new AnnosRaakaAine(result.getInt("annos_id"), result.getInt("raakaAine_id"), null, result.getInt("jarjestys"), result.getString("maara"), result.getString("ohje")));
             }
         };
 
@@ -36,7 +36,7 @@ public class AnnosRaakaAineDao implements Dao<AnnosRaakaAine, Integer> {
         ResultSet result = stmt.executeQuery();
 
         while (result.next()) {
-            ara.add(new AnnosRaakaAine(result.getInt("annos_id"), result.getInt("raaka_aine_id"), result.getString("nimi"), result.getInt("jarjestys"), result.getInt("maara"), result.getString("ohje")));
+            ara.add(new AnnosRaakaAine(result.getInt("annos_id"), result.getInt("raaka_aine_id"), result.getString("nimi"), result.getInt("jarjestys"), result.getString("maara"), result.getString("ohje")));
         }
 
         result.close();
@@ -54,7 +54,7 @@ public class AnnosRaakaAineDao implements Dao<AnnosRaakaAine, Integer> {
         stmt.setInt(1, ara.getRaakaAine_id());
         stmt.setInt(2, ara.getAnnos_id());
         stmt.setInt(3, ara.getJarjestys());
-        stmt.setInt(4, ara.getMaara());
+        stmt.setString(4, ara.getMaara());
         stmt.setString(5, ara.getOhje());
         stmt.executeUpdate();
         stmt.close();
