@@ -14,11 +14,7 @@
         <ul>
             <li th:each="aines : ${ainekset}">
                 <span th:text="${aines.nimi}"></span>
-                <span>(</span>
-                <a th:href="@{~/ainekset/{id}(id=${aines.id})}">
-                    <span>poista</span>
-                </a>
-                <span>)</span>
+                (<a th:href="@{~/ainekset/{id}/poista(id=${aines.id})}">poista</a>)
             </li>
         </ul>
 
