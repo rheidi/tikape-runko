@@ -89,6 +89,14 @@ public class Main {
             );
         });
 
+        Spark.get("/smoothiet/:id/poista", (req, res) -> {
+            Integer id = Integer.parseInt(req.params("id"));
+            andrad.delete(id);
+            and.delete(id);
+            res.redirect("/smoothiet");
+            return "";
+        });
+
         Spark.post("/ainekset", (req, res) -> {
             String nimi = req.queryParams("aine");
             System.out.println("aine: " + nimi);
