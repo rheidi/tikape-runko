@@ -14,6 +14,7 @@
             <li th:each="smoothie : ${smoothiet}">
                 <a th:href="@{~/smoothiet/{id}(id=${smoothie.id})}">
                     <span th:text="${smoothie.nimi}">Smoothien nimi</span></a>
+                (<a th:href="@{~/smoothiet/{id}/poista(id=${smoothie.id})}">poista</a>)
             </li>
         </ul>
 
